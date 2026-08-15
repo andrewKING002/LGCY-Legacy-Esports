@@ -479,3 +479,16 @@ function editPlayer(id){ if(!isOwner() && !isLeader()){toast("Leaders only");ret
 </script>
 </body>
 </html>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://sdteqrstljthsgmltnhb.supabase.co";
+const SUPABASE_KEY = "sb_publishable_H6XY_Y4e0PBUMOAxaasIpw__pn2er1j";
+
+const supabase = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+console.log("LGCY Supabase connected");
+</script>
