@@ -260,6 +260,24 @@ async function loadFromSupabase(){
 
   return data;
 }
+  async function syncPlayersFromSupabase(){
+  const players = await loadFromSupabase();
+
+  if(!players || !players.length) return false;
+
+  db.players = players.map(p => ({
+    ...p,
+    weeklyPoints: p.weekly_points || 0,
+    weeklyGames: p.weekly_games || 0,
+    weeklyWins: p.weekly_wins || 0,
+    weeklyKills: p.weekly_kills || 0,
+    weeklyDeaths: p.weekly_deaths || 0,
+    weeklyMvp: p.weekly_mvp || 0
+  }));
+
+  save();
+  return true;
+  }
 function load(){
  try{
   const raw=localStorage.getItem(STORAGE);
