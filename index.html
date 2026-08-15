@@ -202,7 +202,16 @@ const seedPlayers=[
  {id:"newplayer2",name:"Player 20",role:"FLEX",team:"—",pin:"1131",games:0,kills:0,deaths:0,score:0,points:0,weeklyPoints:0,weeklyGames:0,weeklyWins:0,weeklyKills:0,weeklyDeaths:0,weeklyMvp:0,active:true}
 ];
 const state={page:"dashboard",user:null};
-let db=load(); ensureWeeklyRollover();
+let db=load();
+
+syncPlayersFromSupabase().then(ok=>{
+  if(ok){
+    renderProfilePicker();
+    render();
+  }
+});
+
+ensureWeeklyRollover();
 
 
 function renderProfilePicker(){
