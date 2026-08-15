@@ -246,7 +246,20 @@ function ensureWeeklyRollover(){
    db.weekKey=current; db.weekNumber=(db.weekNumber||1)+1; save();
  }
 }
+async function loadFromSupabase(){
+  const { data, error } = await supabase
+    .from("players")
+    .select("*")
+    .eq("active", true)
+    .order("name");
 
+  if(error){
+    console.error("LGCY Supabase player load failed:", error);
+    return null;
+  }
+
+  return data;
+}
 function load(){
  try{
   const raw=localStorage.getItem(STORAGE);
